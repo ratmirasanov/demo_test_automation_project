@@ -1,0 +1,10 @@
+.idea/
+env/
+*.pyc
+.cache/
+.travis.token
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
