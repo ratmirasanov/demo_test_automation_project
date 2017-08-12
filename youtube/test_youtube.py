@@ -40,6 +40,8 @@ class YoutubeTest(unittest.TestCase, Utilities):
         self.click(next_password_button_element)
         time.sleep(config.DELAY2)
 
+        self.make_screenshot()
+
         print('Test 1: User is successfully logged in.')
 
     def tearDown(self):

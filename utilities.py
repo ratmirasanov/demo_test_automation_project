@@ -1,5 +1,7 @@
 """Module Utilities with different useful methods."""
 
+import datetime
+
 from selenium import webdriver
 from selenium.webdriver.support import ui
 from selenium.common.exceptions import TimeoutException
@@ -229,3 +231,11 @@ class Utilities:
         logs = self.driver.get_log('browser')
         for log in logs:
             print(str(log))
+
+    def make_screenshot(self):
+        """A method for making a screenshot of the screen."""
+
+        self.driver.get_screenshot_as_file("./screenshots/" +
+                                           str(datetime.datetime.now().time()) +
+                                           ".png"
+                                           )
