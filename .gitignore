@@ -1,8 +1,10 @@
 .idea/
 env/
+screenshots/
 *.pyc
 .cache/
 .travis.token
+.DS_Store
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
