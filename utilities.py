@@ -239,3 +239,8 @@ class Utilities:
                                            str(datetime.datetime.now().time()) +
                                            ".png"
                                            )
+
+    def get_current_url(self):
+        """A method for getting the current URL of page."""
+
+        return self.driver.current_url
