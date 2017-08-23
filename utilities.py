@@ -15,7 +15,6 @@ import config
 class Utilities:
     """Class Utilities with different useful methods."""
     URL = ""
-    auto_login = True
 
     def fill_form(self, data, path=''):
         """A method for filling html form on the page."""
@@ -62,19 +61,11 @@ class Utilities:
             else:
                 self.fill_form(val, key)
 
-    def _auto_login(self, user_token):
-        # Go to URL.
-        self.driver.get(config.DOMAIN + "/account/login?token=" + user_token)
-        self.wait_invisibility_by_css(".loader_overlay")
-
-    def _set_up(self, user_token=''):
+    def _set_up(self):
         # Creation of instance of the browser.
         desired = DesiredCapabilities.CHROME
         desired['loggingPrefs'] = {'browser':'ALL'}
         self.driver = webdriver.Chrome(desired_capabilities=desired)
-
-        if self.auto_login is True:
-            self._auto_login(user_token)
 
         # Go to URL.
         self.driver.get(config.DOMAIN + self.URL)

@@ -11,7 +11,6 @@ class YoutubeTest(unittest.TestCase, Utilities):
     """Class YoutubeTest for testing different features of Youtube."""
     # Set URL.
     URL = ""
-    auto_login = False
 
     def setUp(self):
         self._set_up()
