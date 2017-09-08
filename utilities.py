@@ -228,8 +228,7 @@ class Utilities:
 
         self.driver.get_screenshot_as_file("./screenshots/" +
                                            str(datetime.datetime.now().time()) +
-                                           ".png"
-                                           )
+                                           ".png")
 
     def get_current_url(self):
         """A method for getting the current URL of page."""
