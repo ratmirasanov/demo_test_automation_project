@@ -20,7 +20,7 @@ class YoutubeTest(unittest.TestCase, Utilities):
 
         # Finding elements on the page and actions.
         login_button_element = self.find_by_css\
-            (".signin-container .yt-uix-button.yt-uix-button-size-default.yt-uix-button-primary")
+            ("#button>#text.style-scope.ytd-button-renderer.style-brand")
         self.click(login_button_element)
 
         email_field_element = self.find_by_id("identifierId")
