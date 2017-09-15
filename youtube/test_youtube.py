@@ -30,10 +30,10 @@ class YoutubeTest(unittest.TestCase, Utilities):
         time.sleep(config.DELAY2)
 
         # Waiting for field to appear.
-        self.find_visible_by_css(".whsOnd.zHQkBf")
+        self.wait_visibility_by_css(".whsOnd.zHQkBf")
 
         # Finding elements on the page and actions.
-        password_field_element = self.find_visible_by_css(".whsOnd.zHQkBf")
+        password_field_element = self.find_by_css(".whsOnd.zHQkBf")
         password_field_element.send_keys(config.USER1['password'])
         next_password_button_element = self.find_by_id("passwordNext")
         self.click(next_password_button_element)

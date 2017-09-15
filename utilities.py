@@ -4,7 +4,7 @@ import datetime
 
 from selenium import webdriver
 from selenium.webdriver.support import ui
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -20,7 +20,7 @@ class Utilities:
         """A method for filling html form on the page."""
 
         for key, val in data.items():
-            if isinstance(val) != dict:
+            if not isinstance(val, dict):
 
                 try:
                     element_name = key
@@ -30,7 +30,7 @@ class Utilities:
                             element_name = '{}__{}'.format(path, element_name)
 
                         element = self.find_by_id(element_name)
-                    except TimeoutException:
+                    except (TimeoutException, NoSuchElementException):
                         if path != '':
                             element_name = '{}[{}]'.format(path, element_name)
 
@@ -55,9 +55,9 @@ class Utilities:
                             self.set_checkbox_element(element)
                         else:
                             self.set_input_element(element, val)
-                except Exception as error:
-                    print('Error happens on element: ', key, val)
-                    raise error
+                except Exception as ex:
+                    print("Error happens on element: ", key, val)
+                    raise ex
             else:
                 self.fill_form(val, key)
 
@@ -80,8 +80,8 @@ class Utilities:
             "document.getElementsByTagName('head')[0].appendChild(style);"
         )
 
-        # Maximize window.
-        self.driver.maximize_window()
+        # Maximize window size.
+        self.driver.set_window_size(1280, 800, self.driver.window_handles[0])
 
     def _tear_down(self):
         # Close the instance of the browser.
@@ -120,95 +120,69 @@ class Utilities:
         element.clear()
         element.send_keys(val)
 
-    def wait_invisibility_by_css(self, name, timeout=config.DELAY1):
-        """A method for the invisibility of element located by CSS selector on the page."""
+    def wait_visibility_by_id(self, id_name, timeout=config.DELAY1):
+        return ui.WebDriverWait(self.driver, timeout).until(
+            EC.visibility_of_element_located((By.ID, id_name)))
 
-        ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.invisibility_of_element_located((By.CSS_SELECTOR, name)))
+    def wait_visibility_by_name(self, name, timeout=config.DELAY1):
+        return ui.WebDriverWait(self.driver, timeout).until(
+            EC.visibility_of_element_located((By.NAME, name)))
+
+    def wait_visibility_by_name_many(self, name, timeout=config.DELAY1):
+        return ui.WebDriverWait(self.driver, timeout).until(
+            EC.visibility_of_all_elements_located((By.NAME, name)))
+
+    def wait_visibility_by_css(self, css_path, timeout=config.DELAY1):
+        return ui.WebDriverWait(self.driver, timeout).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, css_path)))
+
+    def wait_visibility_by_css_many(self, css_path, timeout=config.DELAY1):
+        return ui.WebDriverWait(self.driver, timeout).until(
+            EC.visibility_of_all_elements_located((By.CSS_SELECTOR, css_path)))
+
+    def wait_invisibility_by_css(self, name, timeout=config.DELAY1):
+        return ui.WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located((By.CSS_SELECTOR, name)))
 
     def wait_invisibility(self, element, timeout=config.DELAY1):
-        """A method for the invisibility of element located on the page."""
+        return ui.WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located(element))
 
-        ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.invisibility_of_element_located(element))
+    def find_clickable_by_id(self, id_name, timeout=config.DELAY1):
+        return ui.WebDriverWait(self.driver, timeout).until(
+            EC.element_to_be_clickable((By.ID, id_name)))
 
-    def find_by_id(self, id_of_element, timeout=config.DELAY2):
-        """A method for a finding of the element located by id on the page."""
+    def find_clickable_by_name(self, name, timeout=config.DELAY1):
+        return ui.WebDriverWait(self.driver, timeout).until(
+            EC.element_to_be_clickable((By.NAME, name)))
 
-        return ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.presence_of_element_located((By.ID, id_of_element)))
+    def find_clickable_by_css(self, css_path, timeout=config.DELAY1):
+        return ui.WebDriverWait(self.driver, timeout).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, css_path)))
 
-    def find_clickable_by_id(self, id_of_element, timeout=config.DELAY2):
-        """A method for a finding of the element to be clickable by id on the page."""
+    def find_by_id(self, id_name):
+        return self.driver.find_element_by_id(id_name)
 
-        return ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.element_to_be_clickable((By.ID, id_of_element)))
+    def find_by_name(self, name):
+        return self.driver.find_element_by_name(name)
 
-    def find_visible_by_id(self, id_of_element, timeout=config.DELAY2):
-        """A method for a finding of the element to be visible by id on the page."""
+    def find_by_name_many(self, name):
+        return self.driver.find_elements_by_name(name)
 
-        return ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.visibility_of_element_located((By.ID, id_of_element)))
+    def find_by_css(self, css_path):
+        return self.driver.find_element_by_css_selector(css_path)
 
-    def find_by_name(self, name, timeout=config.DELAY2):
-        """A method for a finding of the element located by name on the page."""
+    def find_by_css_many(self, css_path):
+        return self.driver.find_elements_by_css_selector(css_path)
 
-        return ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.presence_of_element_located((By.NAME, name)))
+    def find_by_link(self, link_text):
+        return self.driver.find_elements_by_link_text(link_text)
 
-    def find_clickable_by_name(self, name, timeout=config.DELAY2):
-        """A method for a finding of the element to be clickable by name on the page."""
+    def find_by_xpath(self, xpath):
+        return self.driver.find_element_by_xpath(xpath)
 
-        return ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.element_to_be_clickable((By.NAME, name)))
-
-    def find_by_name_many(self, name, timeout=config.DELAY2):
-        """A method for a finding of the elements located by name on the page."""
-
-        return ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.presence_of_all_elements_located((By.NAME, name)))
-
-    def find_by_css(self, css_path, timeout=config.DELAY2):
-        """A method for a finding of the element located by CSS selector on the page."""
-
-        return ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.presence_of_element_located((By.CSS_SELECTOR, css_path)))
-
-    def find_clickable_by_css(self, css_path, timeout=config.DELAY2):
-        """A method for a finding of the element to be clickable by CSS selector on the page."""
-
-        return ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.element_to_be_clickable((By.CSS_SELECTOR, css_path)))
-
-    def find_visible_by_css(self, css_path, timeout=config.DELAY2):
-        """A method for a finding of the element to be visible by CSS selector on the page."""
-
-        return ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.visibility_of_element_located((By.CSS_SELECTOR, css_path)))
-
-    def find_by_css_many(self, css_path, timeout=config.DELAY2):
-        """A method for a finding of the elements located by CSS selector on the page."""
-
-        return ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, css_path)))
-
-    def find_by_link(self, link_text, timeout=config.DELAY2):
-        """A method for a finding of the element located by link text on the page."""
-
-        return ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.presence_of_element_located((By.LINK_TEXT, link_text)))
-
-    def find_by_xpath(self, xpath, timeout=config.DELAY2):
-        """A method for a finding of the element located by XPath on the page."""
-
-        return ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.presence_of_element_located((By.XPATH, xpath)))
-
-    def find_by_xpath_many(self, xpath, timeout=config.DELAY2):
-        """A method for a finding of the elements located by XPath on the page."""
-
-        return ui.WebDriverWait(self.driver, timeout)\
-            .until(EC.presence_of_all_elements_located((By.XPATH, xpath)))
+    def find_by_xpath_many(self, xpath):
+        return self.driver.find_elements_by_xpath(xpath)
 
     def click(self, element):
         """A method for a clicking on the element on the page."""
