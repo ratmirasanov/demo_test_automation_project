@@ -68,7 +68,10 @@ class Utilities:
         self.driver = webdriver.Chrome(desired_capabilities=desired)
 
         # Go to URL.
-        self.driver.get(config.DOMAIN + self.URL)
+        if config.DOMAIN.startswith("http"):
+            self.driver.get(config.DOMAIN + self.URL)
+        else:
+            raise Exception("Invalid domain name. Use 'http' or 'https' before domain name.!")
 
         # Disable animations.
         self.driver.execute_script(
