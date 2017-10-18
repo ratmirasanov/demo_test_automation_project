@@ -9,3 +9,4 @@ USER1 = {
     'email': 'gfautotesting1@gmail.com',
     'password': 'fon3omk5iar23fdr1yu1',
 }
+SCROLL_PAUSE_TIME = 2
