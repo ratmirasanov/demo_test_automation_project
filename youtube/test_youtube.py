@@ -37,7 +37,9 @@ class YoutubeTest(unittest.TestCase, Utilities):
         password_field_element.send_keys(config.USER1['password'])
         next_password_button_element = self.find_by_id("passwordNext")
         self.click(next_password_button_element)
-        time.sleep(config.DELAY2)
+
+        # Waiting for button to appear.
+        self.wait_visibility_by_css("#avatar-btn")
 
         self.make_screenshot()
 
