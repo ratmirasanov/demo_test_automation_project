@@ -144,9 +144,9 @@ class Utilities:
         return ui.WebDriverWait(self.driver, timeout).until(
             EC.visibility_of_all_elements_located((By.CSS_SELECTOR, css_path)))
 
-    def wait_invisibility_by_css(self, name, timeout=config.DELAY1):
+    def wait_invisibility_by_css(self, css_path, timeout=config.DELAY1):
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.invisibility_of_element_located((By.CSS_SELECTOR, name)))
+            EC.invisibility_of_element_located((By.CSS_SELECTOR, css_path)))
 
     def wait_invisibility(self, element, timeout=config.DELAY1):
         return ui.WebDriverWait(self.driver, timeout).until(
