@@ -14,6 +14,8 @@ class YoutubeTest(unittest.TestCase, Utilities):
     URL = ""
 
     def setUp(self):
+        """"Set up"- method which is running before each test."""
+
         self._set_up()
 
     def test_login_to_youtube(self):
@@ -26,9 +28,11 @@ class YoutubeTest(unittest.TestCase, Utilities):
 
         self.make_screenshot()
 
-        print('Test 1: User is successfully logged in.')
+        print("Test 1: User is successfully logged in.")
 
     def tearDown(self):
+        """"Tear down"- method which is running after each test."""
+
         self._tear_down()
 
 

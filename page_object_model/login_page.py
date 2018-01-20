@@ -14,6 +14,7 @@ from utilities import Utilities
 class LoginPage(PageObject, Utilities):
     """Class LoginPage for mapping the login page of Youtube."""
 
+    # Mapping web elements on the page.
     email_field = PageElement(id_="identifierId")
     next_email_button = PageElement(id_="identifierNext")
     password_field = PageElement(css=".whsOnd.zHQkBf")
@@ -31,7 +32,8 @@ class LoginPage(PageObject, Utilities):
         self.wait_visibility_by_css("#avatar-btn")
 
     def wait_visibility_by_css(self, css_path, timeout=config.DELAY1):
-        """The overridden method from Utilities class."""
+        """The overridden method for waiting visibility of web element on the page
+        from Utilities class."""
 
         return ui.WebDriverWait(self.w, timeout).until(
             EC.visibility_of_element_located((By.CSS_SELECTOR, css_path)))
