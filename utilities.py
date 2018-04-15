@@ -204,8 +204,9 @@ class Utilities:
     def make_screenshot(self):
         """A method for making a screenshot of the screen."""
 
-        self.driver.get_screenshot_as_file("./screenshots/" +
-                                           str(datetime.datetime.now().time()) +
+        self.driver.get_screenshot_as_file(config.ROOT_DIR +
+                                           "/screenshots/" +
+                                           str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M")) +
                                            ".png")
 
     def get_current_url(self):

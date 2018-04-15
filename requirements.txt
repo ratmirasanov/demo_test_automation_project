@@ -1,4 +1,4 @@
-selenium==3.9.0
-pylint==1.8.2
+selenium==3.11.0
+pylint==1.8.4
 page-objects==1.1.0
 requests==2.18.4
