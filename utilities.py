@@ -2,6 +2,7 @@
 
 import datetime
 import time
+import pickle
 
 from selenium import webdriver
 from selenium.webdriver.support import ui
@@ -64,8 +65,14 @@ class Utilities:
 
     def _set_up(self):
         # Creation of instance of the browser.
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option("prefs", {
+            "profile.default_content_setting_values.notifications": 1,
+        })
         desired = DesiredCapabilities.CHROME
-        desired['loggingPrefs'] = {'browser':'ALL'}
+        desired['loggingPrefs'] = {'browser': 'ALL'}
+        desired.update(options.to_capabilities())
+
         self.driver = webdriver.Chrome(desired_capabilities=desired)
 
         # Go to URL.
@@ -85,7 +92,7 @@ class Utilities:
         )
 
         # Maximize window size.
-        self.driver.set_window_size(1280, 800, self.driver.window_handles[0])
+        self.driver.set_window_size(1440, 900, self.driver.window_handles[0])
 
     def _tear_down(self):
         # Close the instance of the browser.
@@ -209,6 +216,21 @@ class Utilities:
                                            str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M")) +
                                            ".png")
 
+    def save_cookie(self, name):
+        """A method for saving cookies for domain."""
+
+        with open(name + ".pkl", "wb") as filehandler:
+            pickle.dump(self.driver.get_cookies(), filehandler)
+
+    def load_cookie(self, name):
+        """A method for loading cookies for domain."""
+
+        with open(name + ".pkl", "rb") as cookiesfile:
+            cookies = pickle.load(cookiesfile)
+
+            for cookie in cookies:
+                self.driver.add_cookie(cookie)
+
     def get_current_url(self):
         """A method for getting the current URL of page."""
 
@@ -232,3 +254,8 @@ class Utilities:
             if new_height == last_height:
                 break
             last_height = new_height
+
+    def refresh_page(self):
+        """A method for refreshing the page."""
+
+        self.driver.refresh()
