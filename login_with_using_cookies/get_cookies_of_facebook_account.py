@@ -30,6 +30,7 @@ class GetCookies(Utilities):
         login_button = self.find_by_id("loginbutton")
         self.click(login_button)
 
+        # Saving user's cookies.
         self.save_cookie("ratmir.asanov.demo")
         time.sleep(config.DELAY2)
 

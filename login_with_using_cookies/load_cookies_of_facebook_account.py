@@ -19,9 +19,11 @@ class LoadCookies(Utilities):
         self.driver.get(config.DOMAIN)
         time.sleep(config.DELAY2)
 
+        # Loading user's pre-saved cookies.
         self.load_cookie(name_of_cookies_file)
         time.sleep(config.DELAY2)
 
+        # Refresh the page to see the changes (user should be logged in).
         self.refresh_page()
         time.sleep(config.DELAY2 * 5)
 
