@@ -9,7 +9,7 @@ from utilities import Utilities
 class LoadCookies(Utilities):
     """Class for loading cookies for the domain."""
 
-    def start(self, name_of_cookies_file):
+    def __init__(self, name_of_cookies_file):
         """Method for loading cookies for the domain."""
 
         config.DOMAIN = "https://www.facebook.com"
@@ -31,5 +31,4 @@ class LoadCookies(Utilities):
 
 
 if __name__ == '__main__':
-    COOKIE = LoadCookies()
-    COOKIE.start("ratmir.asanov.demo")
+    COOKIE = LoadCookies("ratmir.asanov.demo")

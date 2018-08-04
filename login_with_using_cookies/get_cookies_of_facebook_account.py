@@ -9,7 +9,7 @@ from utilities import Utilities
 class GetCookies(Utilities):
     """Class for saving cookies for the domain."""
 
-    def start(self, email="", password=""):
+    def __init__(self, email="", password=""):
         """Method for saving cookies for the domain."""
 
         config.DOMAIN = "https://facebook.com"
@@ -38,5 +38,4 @@ class GetCookies(Utilities):
 
 
 if __name__ == '__main__':
-    COOKIE = GetCookies()
-    COOKIE.start("ratmir.asanov.demo@gmail.com", "xxn3omk5iar23fdr1yxx")
+    COOKIE = GetCookies(config.USER1['email'], config.USER1['password'])
