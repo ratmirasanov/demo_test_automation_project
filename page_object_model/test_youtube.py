@@ -10,6 +10,7 @@ from page_object_model.login_page import LoginPage
 
 class YoutubeTest(unittest.TestCase, Utilities):
     """Class YoutubeTest for testing different features of Youtube."""
+
     # Set URL.
     URL = ""
 

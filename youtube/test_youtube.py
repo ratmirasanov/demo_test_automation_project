@@ -9,6 +9,7 @@ from utilities import Utilities
 
 class YoutubeTest(unittest.TestCase, Utilities):
     """Class YoutubeTest for testing different features of Youtube."""
+
     # Set URL.
     URL = ""
 
@@ -22,7 +23,7 @@ class YoutubeTest(unittest.TestCase, Utilities):
 
         # Finding elements on the page and actions.
         login_button_element = self.find_by_css\
-            ("#button>#text.style-scope.ytd-button-renderer.style-brand")
+            ("#button>#text.style-scope.ytd-button-renderer.style-blue-text.size-default")
         self.click(login_button_element)
 
         email_field_element = self.find_by_id("identifierId")
