@@ -250,6 +250,12 @@ class Utilities:
         self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
         element.click()
 
+    def click_via_js(self, element):
+        """A method for a clicking on the element on the page using JS."""
+
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        self.driver.execute_script("arguments[0].click();", element)
+
     def print_logs(self):
         """A method for a printing logs of the console of the browser in the terminal."""
 
