@@ -9,7 +9,6 @@ import traceback
 
 from selenium import webdriver
 from selenium.webdriver.support import ui
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -22,69 +21,6 @@ class Utilities:
 
     URL = ""
     driver = None
-
-    def fill_form(self, data, path=""):
-        """A method for filling html form on the page."""
-
-        for key, val in data.items():
-            if not isinstance(val, dict):
-                try:
-
-                    element_name = key
-
-                    try:
-                        if path != "":
-
-                            element_name = "{}__{}".format(path, element_name)
-
-                        element = self.find_by_id(element_name)
-
-                    except (TimeoutException, NoSuchElementException):
-                        if path != "":
-
-                            element_name = "{}[{}]".format(path, element_name)
-
-                        element = self.find_by_name(element_name)
-
-                    element_tag = element.tag_name
-
-                    # If we catch div, this means we are working with radiobutton.
-                    if element_tag == "div":
-                        if path != "":
-
-                            element_name = "{}[{}]".format(path, element_name.split("__")[1])
-
-                        self.set_radio_element(element_name, val)
-
-                    else:
-
-                        element_type = element.get_attribute("type")
-
-                        if element_tag == "select":
-
-                            self.set_select_element(element, val)
-
-                        elif element_tag == "input" and element_type == "radio":
-
-                            self.set_radio_element(element_name, val)
-
-                        elif element_tag == "input" and element_type == "checkbox":
-
-                            self.set_checkbox_element(element)
-
-                        else:
-
-                            self.set_input_element(element, val)
-
-                except Exception as ex:
-
-                    print("Error happens on element: ", key, val)
-
-                    raise ex
-
-            else:
-
-                self.fill_form(val, key)
 
     def _set_up(self):
 
