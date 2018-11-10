@@ -206,7 +206,7 @@ class Utilities:
 
         self.driver.get_screenshot_as_file(config.ROOT_DIR +
                                            "/screenshots/" +
-                                           str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M")) +
+                                           str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")) +
                                            ".png")
 
     def save_cookie(self, name):

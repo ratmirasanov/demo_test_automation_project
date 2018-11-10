@@ -1,5 +1,5 @@
-selenium==3.14.0
+selenium==3.141.0
 pylint==2.1.1
 page-objects==1.1.0
-requests==2.19.1
-ipython==6.2.1
+requests==2.20.1
+ipython==7.1.1
