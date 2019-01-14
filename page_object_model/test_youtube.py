@@ -25,10 +25,8 @@ class YoutubeTest(unittest.TestCase, Utilities):
         main_page = MainPage(self.driver, root_uri=config.DOMAIN)
         main_page.goto_login_page()
         login_page = LoginPage(self.driver)
-        login_page.login(config.USER1['email'], config.USER1['password'])
-
+        login_page.login(config.USER1["email"], config.USER1["password"])
         self.make_screenshot()
-
         print("Test 1: User is successfully logged in.")
 
     def tearDown(self):
@@ -37,5 +35,5 @@ class YoutubeTest(unittest.TestCase, Utilities):
         self._tear_down()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
