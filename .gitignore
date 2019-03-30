@@ -1,3 +1,4 @@
 .idea/
-env/
+venv/
 screenshots/
+__pycache__/
