@@ -13,7 +13,7 @@ class YoutubeTest(unittest.TestCase, Utilities):
     URL = ""
 
     def setUp(self):
-        """"Set up"- method which is running before each test."""
+        """"Set up" -- method which is running before each test."""
 
         self._set_up()
 
@@ -21,8 +21,8 @@ class YoutubeTest(unittest.TestCase, Utilities):
         """A method for login on the Youtube."""
 
         # Finding elements on the page and actions.
-        self.find_clickable_by_css(
-            "#button>#text.style-scope.ytd-button-renderer.style-blue-text.size-default").click()
+        self.find_clickable_by_css("#buttons a > .style-scope.ytd-button-renderer"
+                                   ".style-suggestive.size-small[role='button']").click()
         self.find_clickable_by_id("identifierId").send_keys(config.USER1["email"])
         self.find_clickable_by_id("identifierNext").click()
         self.wait_invisibility_by_id("identifierId")
@@ -34,7 +34,7 @@ class YoutubeTest(unittest.TestCase, Utilities):
         print("Test 1: User is successfully logged in.")
 
     def tearDown(self):
-        """"Tear down"- method which is running after each test."""
+        """"Tear down" -- method which is running after each test."""
 
         self._tear_down()
 

@@ -15,7 +15,7 @@ class YoutubeTest(unittest.TestCase, Utilities):
     URL = ""
 
     def setUp(self):
-        """"Set up"- method which is running before each test."""
+        """"Set up" -- method which is running before each test."""
 
         self._set_up()
 
@@ -30,7 +30,7 @@ class YoutubeTest(unittest.TestCase, Utilities):
         print("Test 1: User is successfully logged in.")
 
     def tearDown(self):
-        """"Tear down"- method which is running after each test."""
+        """"Tear down" -- method which is running after each test."""
 
         self._tear_down()
 
