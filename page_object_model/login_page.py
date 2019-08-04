@@ -17,6 +17,7 @@ class LoginPage(PageObject, Utilities):
     next_email_button = PageElement(id_="identifierNext")
     password_field = PageElement(css=".whsOnd.zHQkBf")
     next_password_button = PageElement(id_="passwordNext")
+    done_button = PageElement(css=".ZFr60d.CeoRYc")
 
     def login(self, email=config.USER1["email"], password=config.USER1["password"]):
         """A method for login on the Youtube."""
@@ -30,6 +31,16 @@ class LoginPage(PageObject, Utilities):
         self.password_field = password
         self.find_clickable_by_id("passwordNext")
         self.next_password_button.click()
+
+        try:
+
+            self.find_clickable_by_css(".ZFr60d.CeoRYc")
+            self.done_button.click()
+
+        except:
+
+            pass
+
         self.wait_visibility_by_css("#avatar-btn")
 
     def wait_visibility_by_css(self, css_selector, timeout=config.DELAY1):

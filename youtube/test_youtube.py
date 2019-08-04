@@ -28,6 +28,14 @@ class YoutubeTest(unittest.TestCase, Utilities):
         self.wait_invisibility_by_id("identifierId")
         self.find_clickable_by_css(".whsOnd.zHQkBf").send_keys(config.USER1["password"])
         self.find_clickable_by_id("passwordNext").click()
+
+        try:
+            self.find_clickable_by_css(".ZFr60d.CeoRYc").click()
+
+        except:
+
+            pass
+
         # Waiting for button to appear.
         self.wait_visibility_by_css("#avatar-btn")
         self.make_screenshot()
