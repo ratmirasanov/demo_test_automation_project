@@ -174,12 +174,12 @@ class Utilities:
         return ui.WebDriverWait(self.driver, timeout).until(
             EC.frame_to_be_available_and_switch_to_it((By.CSS_SELECTOR, css_selector)))
 
-    def find_clickable_by_id(self, id_attribute, timeout=config.DELAY1):
+    def wait_clickable_by_id(self, id_attribute, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
             EC.element_to_be_clickable((By.ID, id_attribute)))
 
-    def find_clickable_by_css(self, css_selector, timeout=config.DELAY1):
+    def wait_clickable_by_css(self, css_selector, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, css_selector)))
@@ -284,6 +284,10 @@ class Utilities:
             cookies = pickle.load(cookiesfile)
 
             for cookie in cookies:
+
+                if isinstance(cookie.get("expiry"), float):
+
+                    cookie["expiry"] = int(cookie["expiry"])
 
                 self.driver.add_cookie(cookie)
 

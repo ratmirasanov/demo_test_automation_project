@@ -19,11 +19,11 @@ class MainPage(PageObject, Utilities):
     def goto_login_page(self):
         """A method for opening the login page on the Youtube."""
 
-        self.find_clickable_by_css("#buttons a > .style-scope.ytd-button-renderer"
+        self.wait_clickable_by_css("#buttons a > .style-scope.ytd-button-renderer"
                                    ".style-suggestive.size-small[role='button']")
         self.login_button.click()
 
-    def find_clickable_by_css(self, css_selector, timeout=config.DELAY1):
+    def wait_clickable_by_css(self, css_selector, timeout=config.DELAY1):
         """The overridden method for waiting for clickability of web element on the page
          from Utilities class."""
 

@@ -21,16 +21,16 @@ class YoutubeTest(unittest.TestCase, Utilities):
         """A method for login on the Youtube."""
 
         # Finding elements on the page and actions.
-        self.find_clickable_by_css("#buttons a > .style-scope.ytd-button-renderer"
+        self.wait_clickable_by_css("#buttons a > .style-scope.ytd-button-renderer"
                                    ".style-suggestive.size-small[role='button']").click()
-        self.find_clickable_by_id("identifierId").send_keys(config.USER1["email"])
-        self.find_clickable_by_id("identifierNext").click()
+        self.wait_clickable_by_id("identifierId").send_keys(config.USER1["email"])
+        self.wait_clickable_by_id("identifierNext").click()
         self.wait_invisibility_by_id("identifierId")
-        self.find_clickable_by_css(".whsOnd.zHQkBf").send_keys(config.USER1["password"])
-        self.find_clickable_by_id("passwordNext").click()
+        self.wait_clickable_by_css(".whsOnd.zHQkBf").send_keys(config.USER1["password"])
+        self.wait_clickable_by_id("passwordNext").click()
 
         try:
-            self.find_clickable_by_css(".ZFr60d.CeoRYc").click()
+            self.wait_clickable_by_css(".ZFr60d.CeoRYc").click()
 
         except:
 
