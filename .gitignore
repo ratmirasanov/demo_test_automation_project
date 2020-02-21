@@ -2,3 +2,4 @@
 venv/
 screenshots/
 __pycache__/
+.DS_Store

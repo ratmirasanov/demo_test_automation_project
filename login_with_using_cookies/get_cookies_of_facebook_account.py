@@ -14,8 +14,6 @@ class GetCookies(Utilities):
 
         config.DOMAIN = "https://facebook.com"
         self._set_up()
-        # Go to URL.
-        self.driver.get(config.DOMAIN)
         # Finding elements on the page and actions.
         self.wait_visibility_by_id("email").send_keys(email)
         self.find_by_id("pass").send_keys(password)

@@ -14,8 +14,6 @@ class LoadCookies(Utilities):
 
         config.DOMAIN = "https://www.facebook.com"
         self._set_up()
-        # Go to URL.
-        self.driver.get(config.DOMAIN)
         # Loading user's pre-saved cookies.
         self.load_cookie(name_of_cookies_file)
         # Refresh the page to see the changes (user should be logged in).
