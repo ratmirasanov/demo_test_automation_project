@@ -43,7 +43,7 @@ class Utilities:
 
         else:
 
-            raise Exception("Invalid domain name. Use 'http' or 'https' before domain name.!")
+            raise Exception("Invalid domain name. Use 'http' or 'https' before domain name!")
 
     def _tear_down(self):
 
