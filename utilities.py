@@ -26,9 +26,13 @@ class Utilities:
 
         # Creation of instance of the browser.
         options = webdriver.ChromeOptions()
-        options.add_experimental_option("prefs", {
-            "profile.default_content_setting_values.notifications": 1,
-        })
+        options.add_experimental_option(
+            "prefs",
+            {
+                "profile.default_content_setting_values.notifications": 1,
+            },
+        )
+        options.add_experimental_option("prefs", {"intl.accept_languages": "en-GB"})
         desired = DesiredCapabilities.CHROME
         desired["loggingPrefs"] = {"browser": "ALL"}
         desired.update(options.to_capabilities())
@@ -43,7 +47,9 @@ class Utilities:
 
         else:
 
-            raise Exception("Invalid domain name. Use 'http' or 'https' before domain name!")
+            raise Exception(
+                "Invalid domain name. Use 'http' or 'https' before domain name!"
+            )
 
     def _tear_down(self):
 
@@ -60,8 +66,8 @@ class Utilities:
             if element.get_attribute("value") == val:
 
                 self.driver.execute_script(
-                    "arguments[0].scrollIntoView(true);"
-                    "arguments[0].click();", element
+                    "arguments[0].scrollIntoView(true);" "arguments[0].click();",
+                    element,
                 )
 
                 return True
@@ -92,97 +98,116 @@ class Utilities:
     def wait_new_window_to_be_opened(self, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.new_window_is_opened(self.driver.window_handles))
+            EC.new_window_is_opened(self.driver.window_handles)
+        )
 
     def wait_title_to_be(self, expected_title, timeout=config.DELAY1):
 
-        return ui.WebDriverWait(self.driver, timeout).until(
-            EC.title_is(expected_title))
+        return ui.WebDriverWait(self.driver, timeout).until(EC.title_is(expected_title))
 
     def wait_staleness_of(self, element, timeout=config.DELAY1):
 
-        return ui.WebDriverWait(self.driver, timeout).until(
-            EC.staleness_of(element))
+        return ui.WebDriverWait(self.driver, timeout).until(EC.staleness_of(element))
 
-    def wait_text_is_present_in_element_by_id(self, id_attribute, text, timeout=config.DELAY1):
-
-        return ui.WebDriverWait(self.driver, timeout).until(
-            EC.text_to_be_present_in_element((By.ID, id_attribute), text))
-
-    def wait_text_is_present_in_element_by_css(self, css_selector, text, timeout=config.DELAY1):
+    def wait_text_is_present_in_element_by_id(
+        self, id_attribute, text, timeout=config.DELAY1
+    ):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.text_to_be_present_in_element((By.CSS_SELECTOR, css_selector), text))
+            EC.text_to_be_present_in_element((By.ID, id_attribute), text)
+        )
+
+    def wait_text_is_present_in_element_by_css(
+        self, css_selector, text, timeout=config.DELAY1
+    ):
+
+        return ui.WebDriverWait(self.driver, timeout).until(
+            EC.text_to_be_present_in_element((By.CSS_SELECTOR, css_selector), text)
+        )
 
     def wait_presence_by_id(self, id_attribute, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.presence_of_element_located((By.ID, id_attribute)))
+            EC.presence_of_element_located((By.ID, id_attribute))
+        )
 
     def wait_presence_by_css(self, css_selector, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, css_selector)))
+            EC.presence_of_element_located((By.CSS_SELECTOR, css_selector))
+        )
 
     def wait_presence_by_id_many(self, id_attribute, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.presence_of_all_elements_located((By.ID, id_attribute)))
+            EC.presence_of_all_elements_located((By.ID, id_attribute))
+        )
 
     def wait_presence_by_css_many(self, css_selector, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.presence_of_all_elements_located((By.CSS_SELECTOR, css_selector)))
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, css_selector))
+        )
 
     def wait_visibility_by_id(self, id_attribute, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.visibility_of_element_located((By.ID, id_attribute)))
+            EC.visibility_of_element_located((By.ID, id_attribute))
+        )
 
     def wait_visibility_by_css(self, css_selector, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.visibility_of_element_located((By.CSS_SELECTOR, css_selector)))
+            EC.visibility_of_element_located((By.CSS_SELECTOR, css_selector))
+        )
 
     def wait_visibility_by_id_many(self, id_attribute, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.visibility_of_all_elements_located((By.ID, id_attribute)))
+            EC.visibility_of_all_elements_located((By.ID, id_attribute))
+        )
 
     def wait_visibility_by_css_many(self, css_selector, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.visibility_of_all_elements_located((By.CSS_SELECTOR, css_selector)))
+            EC.visibility_of_all_elements_located((By.CSS_SELECTOR, css_selector))
+        )
 
     def wait_invisibility_by_id(self, id_attribute, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.invisibility_of_element_located((By.ID, id_attribute)))
+            EC.invisibility_of_element_located((By.ID, id_attribute))
+        )
 
     def wait_invisibility_by_css(self, css_selector, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.invisibility_of_element_located((By.CSS_SELECTOR, css_selector)))
+            EC.invisibility_of_element_located((By.CSS_SELECTOR, css_selector))
+        )
 
     def wait_availability_of_frame_by_id(self, id_attribute, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.frame_to_be_available_and_switch_to_it((By.ID, id_attribute)))
+            EC.frame_to_be_available_and_switch_to_it((By.ID, id_attribute))
+        )
 
     def wait_availability_of_frame_by_css(self, css_selector, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.frame_to_be_available_and_switch_to_it((By.CSS_SELECTOR, css_selector)))
+            EC.frame_to_be_available_and_switch_to_it((By.CSS_SELECTOR, css_selector))
+        )
 
     def wait_clickable_by_id(self, id_attribute, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.element_to_be_clickable((By.ID, id_attribute)))
+            EC.element_to_be_clickable((By.ID, id_attribute))
+        )
 
     def wait_clickable_by_css(self, css_selector, timeout=config.DELAY1):
 
         return ui.WebDriverWait(self.driver, timeout).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, css_selector)))
+            EC.element_to_be_clickable((By.CSS_SELECTOR, css_selector))
+        )
 
     def find_by_id(self, id_attribute):
 
@@ -264,10 +289,12 @@ class Utilities:
     def make_screenshot(self):
         """A method for making a screenshot of the screen."""
 
-        self.driver.get_screenshot_as_file(config.ROOT_DIR +
-                                           "/screenshots/" +
-                                           str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")) +
-                                           ".png")
+        self.driver.get_screenshot_as_file(
+            config.ROOT_DIR
+            + "/screenshots/"
+            + str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M"))
+            + ".png"
+        )
 
     def save_cookie(self, name):
         """A method for saving cookies for domain."""
@@ -305,13 +332,17 @@ class Utilities:
         while True:
 
             # Scroll down to the bottom.
-            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            self.driver.execute_script(
+                "window.scrollTo(0, document.body.scrollHeight);"
+            )
 
             # Wait to load page.
             time.sleep(config.SCROLL_PAUSE_TIME)
 
             # Calculate new scroll height and compare with last scroll height.
-            new_height = self.driver.execute_script("return document.body.scrollHeight;")
+            new_height = self.driver.execute_script(
+                "return document.body.scrollHeight;"
+            )
 
             if new_height == last_height:
 
@@ -333,7 +364,8 @@ class Utilities:
         """A method for setting key in local storage."""
 
         self.driver.execute_script(
-            "window.localStorage.setItem('{}',{});".format(key, json.dumps(value)))
+            "window.localStorage.setItem('{}',{});".format(key, json.dumps(value))
+        )
 
     def show_error_traceback(self):
         """A method for showing error traceback."""

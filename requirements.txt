@@ -1,6 +1,7 @@
 selenium==3.141.0
-pylint==2.8.0
+pylint==2.8.2
 page-objects==1.1.0
 requests==2.25.1
 ipython==7.22.0
 pytest==6.2.3
+black==21.4b0

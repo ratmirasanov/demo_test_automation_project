@@ -13,9 +13,13 @@ def setup(request):
 
     config.DOMAIN = "https://google.com/"
     options = webdriver.ChromeOptions()
-    options.add_experimental_option("prefs", {
-        "profile.default_content_setting_values.notifications": 1,
-    })
+    options.add_experimental_option(
+        "prefs",
+        {
+            "profile.default_content_setting_values.notifications": 1,
+        },
+    )
+    options.add_experimental_option("prefs", {"intl.accept_languages": "en-GB"})
     desired = DesiredCapabilities.CHROME
     desired["loggingPrefs"] = {"browser": "ALL"}
     desired.update(options.to_capabilities())
@@ -31,7 +35,9 @@ def setup(request):
 
     else:
 
-        raise Exception("Invalid domain name. Use 'http' or 'https' before domain name!")
+        raise Exception(
+            "Invalid domain name. Use 'http' or 'https' before domain name!"
+        )
 
     yield driver
 

@@ -13,19 +13,24 @@ class MainPage(PageObject, Utilities):
     """Class MainPage for mapping the main page of Youtube."""
 
     # Mapping web elements on the page.
-    login_button = PageElement(css="#buttons a > .style-scope.ytd-button-renderer"
-                                   ".style-suggestive.size-small[role='button']")
+    login_button = PageElement(
+        css="#buttons a > .style-scope.ytd-button-renderer"
+        ".style-suggestive.size-small[role='button']"
+    )
 
     def goto_login_page(self):
         """A method for opening the login page on the Youtube."""
 
-        self.wait_clickable_by_css("#buttons a > .style-scope.ytd-button-renderer"
-                                   ".style-suggestive.size-small[role='button']")
+        self.wait_clickable_by_css(
+            "#buttons a > .style-scope.ytd-button-renderer"
+            ".style-suggestive.size-small[role='button']"
+        )
         self.login_button.click()
 
     def wait_clickable_by_css(self, css_selector, timeout=config.DELAY1):
         """The overridden method for waiting for clickability of web element on the page
-         from Utilities class."""
+        from Utilities class."""
 
         return ui.WebDriverWait(self.w, timeout).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, css_selector)))
+            EC.element_to_be_clickable((By.CSS_SELECTOR, css_selector))
+        )
